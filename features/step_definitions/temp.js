@@ -1,11 +1,10 @@
 module.exports = function () {
     this.Given(/^I am on the Cucumber.js GitHub repository$/, function () {
-       // this.browser.url('http://nu.nl');
-        this.HomePage.open();
+        this.homePage.open();
     });
 
     this.When(/^I go to the README file$/, function () {
-        homepage.username.setValue('hoi');
+        this.homePage.username.setValue('hoi');
     });
 
     this.Then(/^I should see "(.*)" as the page title$/, function () {

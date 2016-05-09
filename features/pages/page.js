@@ -1,8 +1,11 @@
-function Page (browser) {
-}
+function Page() {}
 
-Page.prototype.open = function (path) {
-    browser.url('/' + path)
-}
+Page.prototype.setBrowser = function(browser) {
+    this.browser = browser;
+};
 
-module.exports = new Page()
+Page.prototype.open = function(path) {
+    this.browser.url('/' + path);
+};
+
+module.exports = new Page();

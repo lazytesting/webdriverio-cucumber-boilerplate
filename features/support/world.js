@@ -1,16 +1,11 @@
 var webdriverio = require('webdriverio');
-var pageLoader = require('pageLoader.js');
+var pageLoader = require('./pageLoader.js');
 var config = require('../../config.json');
 var client = webdriverio.remote(config.webdriverOptions);
 
-
-
-
-
 function World() {
-    pageLoader.load();
-    this.browser = client.init()
-    var HomePage = homePage(this);
+    this.browser = client.init();
+    pageLoader.load(this);
 }
 
 module.exports = function() {
