@@ -1,0 +1,7 @@
+{
+  "webdriverOptions": {
+    "desiredCapabilities": {
+      "browserName": "phantomjs"
+    }
+  }
+}
