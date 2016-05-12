@@ -5,10 +5,12 @@ const fs = require('fs');
 /**
  * Run tests
  */
+
 startSeleniumServer()
     .then(runCucumber)
     .then(stopSeleniumServer)
     .then(exitWithCode);
+
 
 /**
  * Start the selenium server

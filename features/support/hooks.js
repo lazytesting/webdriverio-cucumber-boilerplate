@@ -1,11 +1,9 @@
-var webdriverio = require('webdriverio');
-var config = require('../../config.json')
-
-var client = webdriverio.remote(config.webdriverOptions);
-
 var myHooks = function () {
-    this.Before(function (scenario) {
-   //     this.browser = client.init()
+    this.Before(function (scenario, callback) {
+        this.browser.init().then(function(){callback()});
+    });
+    this.After(function (scenario, callback) {
+        this.browser.end().then(function(){callback()});
     });
 };
 

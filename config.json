@@ -1,7 +1,8 @@
 {
   "webdriverOptions": {
     "desiredCapabilities": {
-      "browserName": "phantomjs"
-    }
+      "browserName": "chrome"
+    },
+    "baseUrl": "https://github.com/lazytesting/webdriverio-cucumber-boilerplate"
   }
 }

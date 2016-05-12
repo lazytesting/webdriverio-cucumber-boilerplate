@@ -4,7 +4,7 @@ var config = require('../../config.json');
 var client = webdriverio.remote(config.webdriverOptions);
 
 function World() {
-    this.browser = client.init();
+    this.browser =  client;
     pageLoader.load(this);
 }
 
