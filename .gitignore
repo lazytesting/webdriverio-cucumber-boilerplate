@@ -1,5 +1,6 @@
 # Application
 results.json
+junit_results.xml
 
 # Node.js
 node_modules

@@ -1,6 +1,6 @@
 const spawn = require('child_process').spawn;
 const fs = require('fs');
-
+const junitReporter = require('./junit-reporter.js')
 
 /**
  * Run tests
@@ -9,6 +9,7 @@ const fs = require('fs');
 startSeleniumServer()
     .then(runCucumber)
     .then(stopSeleniumServer)
+    .then(createJUnitReport)
     .then(exitWithCode);
 
 
@@ -71,6 +72,18 @@ function stopSeleniumServer(context) {
         resolve(context);
     });
 }
+
+/**
+ * Create the JUnit report
+ * @return {Promise}
+ */
+function createJUnitReport() {
+    return new Promise(resolve => {
+        junitReporter();
+    });
+}
+
+
 
 /**
  * Exit this process with the correct code
