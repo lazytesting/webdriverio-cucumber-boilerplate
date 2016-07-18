@@ -2,6 +2,7 @@
   "resultPath" : "./results.json",
   "JUnitResultPath" : "./junit_results.xml",
   "screenshotFolder" : "./screenshots",
+  "stepTimeout" : 10,
   "webdriverOptions": {
     "desiredCapabilities": {
       "browserName": "chrome"
