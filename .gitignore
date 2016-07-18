@@ -1,6 +1,7 @@
 # Application
 results.json
 junit_results.xml
+screenshots/*
 
 # Node.js
 node_modules
