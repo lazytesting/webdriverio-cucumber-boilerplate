@@ -1,6 +1,6 @@
 {
   "name": "webdriverio-cucumber-boilerplate",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "boilerplate for automated functional testing with webdriverio and cucumber",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "glob": "^7.0.3",
     "mkdirp": "^0.5.1",
     "request": "^2.72.0",
-    "selenium-standalone": "^5.1.0",
+    "selenium-standalone": "latest",
     "webdriverio": "^4.0.7"
   }
 }
