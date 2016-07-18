@@ -1,4 +1,7 @@
 {
+  "resultPath" : "./results.json",
+  "JUnitResultPath" : "./junit_results.xml",
+  "screenshotFolder" : "./screenshots",
   "webdriverOptions": {
     "desiredCapabilities": {
       "browserName": "chrome"

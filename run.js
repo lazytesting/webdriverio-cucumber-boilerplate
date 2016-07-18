@@ -1,22 +1,64 @@
 const spawn = require('child_process').spawn;
 const fs = require('fs');
-const junitReporter = require('./junit-reporter.js')
+const junitReporter = require('./junit-reporter.js');
+const config = require('./config.json');
+const mkdirp = require('mkdirp');
 
 /**
  * Run tests
  */
 
 startSeleniumServer()
+    .then(cleanTestResults)
     .then(runCucumber)
     .then(stopSeleniumServer)
     .then(createJUnitReport)
-    .then(exitWithCode);
+    .then(exitWithCode)
+    .catch(console.log);
+
 
 
 /**
- * Start the selenium server
+ * Run all cucumber test
+ * @param {Object} context
  * @return {Promise}
  */
+function cleanTestResults(context)
+{
+    return new Promise(resolve => {
+        console.log('Clear old test results');
+
+        //cucumber needs empty results file
+        fs.writeFileSync(config.resultPath, "");
+        try {
+            fs.unlinkSync(config.JUnitResultPath);
+        }catch(e) {}
+
+        if( fs.existsSync(config.screenshotFolder) ) {
+            files = fs.readdirSync(config.screenshotFolder);
+            files.forEach(function (file, index) {
+                var curPath = config.screenshotFolder + "/" + file;
+                if (fs.lstatSync(curPath).isDirectory()) {
+                    deleteFolderRecursive(curPath);
+                } else {
+                    fs.unlinkSync(curPath);
+                }
+            });
+        }
+        else {
+            mkdirp(config.screenshotFolder, function(err) {
+                if (err)
+                {
+                    throw err;
+                }
+            });
+        }
+
+
+        resolve(context);
+    });
+}
+
 function startSeleniumServer() {
 
     return new Promise(resolve => {
@@ -35,6 +77,7 @@ function startSeleniumServer() {
         }, 2e3);
     });
 }
+
 
 /**
  * Run all cucumber test
@@ -75,20 +118,22 @@ function stopSeleniumServer(context) {
 
 /**
  * Create the JUnit report
+ * @param {Object} context
  * @return {Promise}
  */
-function createJUnitReport() {
+function createJUnitReport(context) {
     return new Promise(resolve => {
-        junitReporter();
+        console.log('Create JUnit report');
+        junitReporter(config.resultPath, config.JUnitResultPath);
+        resolve(context);
     });
 }
-
-
 
 /**
  * Exit this process with the correct code
  * @param {Object} context - cucumber's exitcode
  */
 function exitWithCode(context) {
+    console.log('Exit')
     process.exit(context.cucumberExitCode);
 }

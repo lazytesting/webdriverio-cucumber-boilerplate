@@ -2,11 +2,11 @@ var cucumber_junit = require('./node_modules/cucumber-junit/lib/cucumber_junit.j
 var fs = require('fs');
 
 
-function junitReport() {
-    fs.readFile('./results.json', (err, data) => {
-        if (err) throw err;
-        fs.writeFile('junit_results.xml', cucumber_junit(data), 'utf8')
-    });
+function junitReport(resultPath, JUnitResultPath) {
+    var data = fs.readFileSync(resultPath);
+    var junitData = cucumber_junit(data);
+    fs.writeFileSync(JUnitResultPath, junitData, 'utf8')
 }
 
-module.exports = junitReport();
+module.exports = junitReport;
+
