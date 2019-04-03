@@ -1,0 +1,10 @@
+image: ubuntu
+
+install:
+- npm install
+
+test_script:
+- npm test
+- sh: ./jam-upload.sh
+
+build: off
